@@ -1,0 +1,49 @@
+---
+title: "Practice Presentation"
+author: "Colleen Yancey"
+date: "January 31, 2018"
+output: 
+  beamer_presentation: 
+    colortheme: orchid
+    highlight: espresso
+    theme: Hannover
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Incremental Bullet Points
+- Writing just dashes can form incremental bullet points
+- They appear one by on in order to emphasis points
+- A simple symbol insertion can block incremental bullet points
+
+
+## Disrupting Incremental Bullet Points
+>- A little forward carrot keeps the bullets from appearing
+>- Instead they all stay on the screen at the same time
+>- The carrot locks all of the bullets on screen, unlike regular dashes
+
+##Inserting a picture
+Adding a picture in center can be done like so
+<center> ![Nature](nature.jpg) <center>
+
+## Using R Outputs
+A random scatter plot should appear below:
+```{r,echo=FALSE}
+library(ggplot2)
+var1 <-runif(10)
+var2 <- runif(10)
+qplot(x=var1, y=var2)
+```
+
+## Creating Colored Text
+>- \color{purple} This is supposed to be purple
+>- \color{green} Green is my favorite color
+>- \color{orange} Orange is bright
+
+## Inserting Photos on a Coordinate System
+<center> ![sunset](sunset.png) <center>
+
+##Inserting Photos with Caption Below Picture
+<center> ![school](school.png) <center>

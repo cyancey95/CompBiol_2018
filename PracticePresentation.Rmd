@@ -1,0 +1,126 @@
+---
+title: "Practice Presentation"
+author: "Colleen Yancey"
+date: "January 31, 2018"
+output:
+  beamer_presentation:
+    fonttheme: professionalfonts
+    highlight: espresso
+    theme: Copenhagen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## 1st Slide Inserting photos
+The code for placing a photo in the center of the slide is much easier than trying to place it somewhere else specifically.
+<center> ![Mountain](nature.jpg) <center>
+
+## 2nd Slide Inserting Photos with Coordinate System
+However, there is a code that has been provided to use that should make it much easier.
+ \begin{picture}(320,250)
+ \put(85,75){\includegraphics[height=6cm]
+ {nature.jpg}}
+ \put(00,60){\begin{minipage}[t]{1\linewidth}
+ {Figure Caption goes here}
+ \end{minipage}}
+ \end{picture}
+ 
+
+## 3rd Slide Incremental slides
+- My first point is that this is pretty easy
+- My second point is that I hope to master Beamer Slides for future use
+- My third point is that this is a very quick way to make professional looking presentations.
+
+## 4th Slide Placing all Bullet Points on One Slide
+>- Typing in an extra carrot seems like it would take a long time but it's not that bad
+>- Formatting is so much quicker in Beamer slides
+>- This is the third bullet point
+
+## 5th Slide Making Color Text
+To make colored text you need to only type in a few extra words using LaTex language
+
+
+> - Color Examples
+> - \color{purple} Purple is Bright 
+> - \color{Green}  Green is a good highlight 
+> - \color{red}  More color changes \color{black}
+
+> -  Back to normal colors 
+> - \color{orange} Switching colors is easy too!
+
+## 6th Slide Placing a Caption Below a photo
+<center> ![Mountain](nature.jpg) <center>
+This hopefully makes the caption below the photo?
+
+##7th Slide Placing a Caption Inside the Photo
+ \begin{picture}(320,250)
+ \put(85,75){\includegraphics[height=6cm]
+ {nature.jpg}}
+ \put(80,70){\begin{minipage}[t]{1\linewidth}
+ {Figure Caption goes here}
+ \end{minipage}}
+ \end{picture}
+
+## 8th Slide with R Output
+
+{r cars, echo = TRUE}
+summary(cars)
+
+
+
+
+## 2nd Slide Inserting Photos with Coordinate System
+However, there is a code that has been provided to use that should make it much easier.
+ \begin{picture}(320,250)
+ \put(85,75){\includegraphics[height=6cm]
+ {nature.jpg}}
+ \put(00,60){\begin{minipage}[t]{1\linewidth}
+ {Figure Caption goes here}
+ \end{minipage}}
+ \end{picture}
+ 
+
+## 3rd Slide Incremental slides
+- My first point is that this is pretty easy
+- My second point is that I hope to master Beamer Slides for future use
+- My third point is that this is a very quick way to make professional looking presentations.
+
+## 4th Slide Placing all Bullet Points on One Slide
+>- Typing in an extra carrot seems like it would take a long time but it's not that bad
+>- Formatting is so much quicker in Beamer slides
+>- This is the third bullet point
+
+## 5th Slide Making Color Text
+To make colored text you need to only type in a few extra words using LaTex language
+
+
+> - Color Examples
+> - \color{purple} Purple is Bright 
+> - \color{Green}  Green is a good highlight 
+> - \color{red}  More color changes \color{black}
+
+> -  Back to normal colors 
+> - \color{orange} Switching colors is easy too!
+
+## 6th Slide Placing a Caption Below a photo
+<center> ![Mountain](nature.jpg) <center>
+This hopefully makes the caption below the photo?
+
+##7th Slide Placing a Caption Inside the Photo
+ \begin{picture}(320,250)
+ \put(85,75){\includegraphics[height=6cm]
+ {nature.jpg}}
+ \put(80,70){\begin{minipage}[t]{1\linewidth}
+ {Figure Caption goes here}
+ \end{minipage}}
+ \end{picture}
+
+## 8th Slide with R Output
+
+{r cars, echo = TRUE}
+summary(cars)
+
+
