@@ -53,8 +53,8 @@ All of these files are on a single line, so first write a regular expression to 
 
 Solution A:
 ```
-Find: mp3 
-Replace: mp3\n
+Find: \s(d{3,}) 
+Replace: \n\1
 ```
 This command as written is mp3 followed by a space in the find function. If you replace it as mp3 and a line a break you will get the output solution of:
 ```

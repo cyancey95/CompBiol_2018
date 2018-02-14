@@ -20,11 +20,14 @@ install.packages("prettydoc")
 ##Homework Assignments
 Below are links to completed homework assignments.
 
+###Homework 1
+The first homework was to create the webpage and get it linked to GitHub!
+
 ###Homework 2
-[Link to graphs](GraphImages.html)
+[Thinking on Paper-early graphs for research](GraphImages.html)
 
 ###Homework 3
-[PDF](Beamer1.pdf)
+[Beamer Presentation Converted to PDF](Beamer1.pdf)
 
 ###Homework 4
 [R Vectors and Equations](homework4.html)
