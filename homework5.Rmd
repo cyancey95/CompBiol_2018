@@ -1,0 +1,111 @@
+---
+title: "Homework 5"
+author: "Colleen Yancey"
+date: "February 14, 2018"
+output: html_document
+---
+
+### Working with Regular Expressions
+
+Problem 1: The primary reason for using Excel to set up data frames is that people like to have the columns aligned. However, if there are not too many columns, it may be faster to do the job in a plain text editor first and align the columns with tabs. In your text editor, type in (or copy and paste from here) the following lines of text:
+```
+First String    Second      1.22      3.4
+Second          More Text   1.555555  2.2220
+Third           x           3         124
+```
+Solution:
+```
+Find: \s{2,}
+Replace: ,
+```
+The above find and replace will find an place where two or more spaces occurr and replace them with a comma.
+
+If you do this you will get:
+```
+First String,Second,1.22,3.4
+Second,More Text,1.555555,2.2220
+Third,x,3,124
+```
+Problem 2: A True Regex Story. I am preparing a collaborative NSF grant with a colleague at another university. One of the pieces of an NSF grant is a listing of potential conflicts of interest. NSF wants to know the first and last name of the collaborator and their institution. Here are a few lines of my conflict list:
+
+```
+Ballif, Bryan, University of Vermont
+Ellison, Aaron, Harvard Forest
+Record, Sydne, Bryn Mawr
+```
+Solution
+```
+FInd: (\w+)\,\s(\w+)\,\s(.*)
+Replace: \2 \1 \(\3\)
+```
+The above commands for find will find the first word separated bya comma and space, then the second word separated by a comma and space... etc. The find command makes it so the first name (2nd expression) is first, then the first expression comes next wihich is the first name, and finally followed by the affiliation which is the third expression. When done in the plain text editor you get:
+```
+Bryan Ballif (University of Vermont)
+Aaron Ellison (Harvard Forest)
+Sydne Record (Bryn Mawr)
+```
+3. A Second True Regex Story. A few weeks ago, at Radio Bean’s Sunday afternoon old-time music session, one of the mandolin players gave me a DVD with over 1000 historic recordings of old-time fiddle tunes.
+The list of tunes (shown here as a single line of text) looks like this:
+```
+0001 Georgia Horseshoe.mp3 0002 Billy In The Lowground.mp3 003 Cherokee Shuffle.mp3 0004 Walking Cane.mp3
+```
+All of these files are on a single line, so first write a regular expression to place each file name on its own line:
+
+Solution A:
+```
+Find: mp3 
+Replace: mp3\n
+```
+This command as written is mp3 followed by a space in the find function. If you replace it as mp3 and a line a break you will get the output solution of:
+```
+0001 Georgia Horseshoe.mp3
+0002 Billy In The Lowground.mp3
+0003 Cherokee Shuffle.mp3
+0004 Walking Cane.mp3
+```
+Now write a regular expression to grab the four digit number and put it at the end of the title:
+```
+Find: (\d{4})\s(.*)\.\mp3
+Replace: (\2)_(\1)\.\mp3
+```
+The above command will give will find the first 4 numbers, the space, and aeverything following until a period. The replace function will then replace what it found with the second expression which is the name of the song, then an underscore, the first expression which is the number of track, and then finally by .mp3.
+```
+Georgia Horseshoe_0001.mp3
+Billy In The Lowground_0002.mp3
+Cherokee Shuffle_0003.mp3
+Walking Cane_0004.mp3
+```
+4. Here is a data frame with genus, species, and two numeric variables.
+```
+Camponotus,pennsylvanicus,10.2,44
+Camponotus,herculeanus,10.5,3
+Myrmica,punctiventris,12.2,4
+Lasius,neoniger,3.3,55
+```
+Write a single regular expression to rearrange the data:
+```
+Find: (\w)(\w+)\,(\w+),(\d+)\.(\d)\,(\d+)
+Replace: (\1)_(\3)\,(\6)
+```
+The above command will find the first letter of the genus and the remainder of the word. Each section is section is then selected using its own expression. In order to repalce the expression, the chunks are called based on their number sequence. The first expression is converted into a single letter to denote genus, and then followed by an underscore. The name of the species is then attached followed by a comma and then the number.
+```
+C_pennsylvanicus,44
+C_herculeanus,3
+M_punctiventris,4
+L_neoniger,55
+```
+Beginning with the original expression, rearrange it to abbreviate the species name like this:
+
+```
+Find: (\w{6})(\w+)\,(\d+)
+Replace: (\1),(\3)
+```
+This command find the first four characters in the line and separates them to create one chunk of expression. The second expression splits the name from the numbers associated with each species. You then need to replace this find only the 1st and 3rd expressions to get the following:
+```
+C_penn,44
+C_herc,3
+M_punc,4
+L_neon,55
+```
+
+

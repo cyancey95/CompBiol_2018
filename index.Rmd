@@ -28,3 +28,6 @@ Below are links to completed homework assignments.
 
 ###Homework 4
 [R Vectors and Equations](homework4.html)
+
+###Homework 5
+[Working with Regular Expressions](homework5.html)
