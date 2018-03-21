@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "415052379",
     "id" : "9CCE253F",
-    "lastKnownWriteTime" : 1520011293,
-    "last_content_update" : 1520011293941,
+    "lastKnownWriteTime" : 1521652483,
+    "last_content_update" : 1521652483335,
     "path" : "C:/Users/95cya/Desktop/CompBiol_2018/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "29,0",
-        "scrollLine" : "0"
+        "cursorPosition" : "42,7",
+        "scrollLine" : "17"
     },
     "relative_order" : 1,
     "source_on_save" : false,
