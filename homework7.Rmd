@@ -7,7 +7,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Homework 7
+# Homework 7&8
 ##Creating Fake Data Sets to Explore Hypotheses
 
 ```{r}
@@ -44,6 +44,16 @@ myANOVA <- function(dataFrame=df){
 }
 
 myANOVA()
+```
+
+#Making a Box Plot of Data
+```{r}
+ANOVAplot <-function(data=df){
+  names(data)<-c("Treatment","Value")
+  plot<-ggplot(data=data,aes(x=Treatment,y=Value ,fill=Treatment)) + geom_boxplot()
+return(plot)
+}
+ANOVAplot()
 ```
 
 5. The data simulation above yields a p value right varies, but is almost always significant to 2 or 3 stars. This shows me that data simulated by this set up with this rough estimation can yield significant findings. 

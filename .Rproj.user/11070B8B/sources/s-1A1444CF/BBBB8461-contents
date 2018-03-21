@@ -1,0 +1,59 @@
+---
+title: 'Homework #9'
+author: "Colleen Yancey"
+date: "March 21, 2018"
+output: html_document
+---
+
+# Structured Programming Practice
+##Psuedo code
+```{r}
+# Call libraries needed
+library(ggplot2)
+library(reshape2)
+
+# Create Variables
+nGroup <- 4
+nName <- c("Control", "Light", "Moderate", "Extreme") 
+nSize <- c(10,10,10,10) # both are n = 6
+nMean <- c(0.6, 0.75,0.95,1.1) # mean response in each group
+nSD <- c(0.3,0.3,0.3,0.3) # variance in each group
+ID <- 1:(sum(nSize))
+
+
+```
+
+
+```{r}
+####################################
+# Function: RandomData
+# These function will create random normal data to help simulate and test hypotheses.
+#input: mean, n, standard deviation
+#output: simulated random normal data set
+#-----------------------------------------
+RandomData <-function(mean1=.6, mean2=.75,mean3=.95,mean4=1.1,n1=10,n2=10,n3=10, n4=10, sd1=.3, sd2=.3,sd3=.3,sd4=.3){
+  myDF<-data.frame(Control=rnorm(mean=mean1, n=n1, sd=sd1), Light=rnorm(mean=mean2, n=n2, sd=sd2), Moderate=rnorm(mean=mean3, n=n3, sd=sd3), Extreme=rnorm(mean=mean4, n=n4, sd=sd4))
+                  return(myDF)}
+################################
+#Function: myANOVA
+#The function will perform an ANOVA analysis and spit generate p values
+#input: data frame from 1st function
+#output: p values analysis
+#-----------------------------
+myANOVA <- function(dataFrame=df){
+ ANOVA <- aov(value~variable, data=dataFrame)
+  myOutput <- summary(ANOVA)
+  return(myOutput)
+}
+##############################
+#Function: PLotANOVA
+# Will plot box plot in ggplot of data simulated
+#inputs: data frame, xVar, yVar, fillVar
+#output the blox plot of data
+#-----------------------------------------------
+PlotANOVA <- function(data=df){
+  ggplot(data=data,aes(x=nName, y=myDF, fill=variable)) + geom_boxplot()
+}
+PlotANOVA()
+```
+
