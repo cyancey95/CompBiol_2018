@@ -106,3 +106,8 @@ BPlot <-function(data=df){
 }
 ```
 
+PLotting both graphs side by side
+```{r}
+ANOVAplot()
+BPlot()
+```
