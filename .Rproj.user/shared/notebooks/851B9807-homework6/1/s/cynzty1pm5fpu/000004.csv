@@ -1,0 +1,8 @@
+"0","z <- read.table(""ECMScores.csv"",header=TRUE,sep="","", stringsAsFactors=FALSE)"
+"0","p1 <- ggplot(data=z, aes(x=ECM.tips.cm, y=..density..)) +"
+"0","  geom_histogram(color=""grey60"",fill=""cornsilk"",size=0.2) "
+"0","gammaPars <- fitdistr(z$ECM.tips.cm,""gamma"")"
+"0","shapeML <- gammaPars$estimate[""shape""]"
+"0","rateML <- gammaPars$estimate[""rate""]"
+"0","stat4 <- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour=""goldenrod"", n = length(z$ECM.tips.cm), args = list(shape=shapeML, rate=rateML))"
+"0"," p1 + stat4"

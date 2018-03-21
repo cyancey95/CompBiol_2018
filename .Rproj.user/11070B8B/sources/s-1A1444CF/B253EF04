@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1521078477603.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B253EF04",
+    "lastKnownWriteTime" : 1520011125,
+    "last_content_update" : 1520011125,
+    "path" : "C:/Users/95cya/Desktop/CompBiol_2018/homework7.Rmd",
+    "project_path" : "homework7.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "22,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

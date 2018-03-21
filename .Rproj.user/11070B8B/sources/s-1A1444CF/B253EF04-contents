@@ -1,0 +1,108 @@
+---
+title: "Homework 7"
+author: "Colleen Yancey"
+date: "February 28, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Homework 7
+##Creating Fake Data Sets to Explore Hypotheses
+
+```{r}
+library(ggplot2)
+```
+
+1. The data I will be looking at today will be the ectomycorrhizal (ECM) colonization of tree roots from my spring data. My hypothesis was that as the intensity of the ice storm increased, there would be an increase in observed ECM colonization. I believe this will happen because trees that were subjected to more intense ice storms will have incurred more damage, thus they will be desparate for nrutrients and materials to aid in repair. As a result, I hypothesize that the more damaged trees will put out higher recruitment signals for ECM and therefore will have higher numbers of ECM fungi on their roots.
+
+2. Generating my fake data set
+3. Generating my Random Data with a function
+```{r}
+# make a function to create random normal data
+
+FakeData <-function(mean1=.6, mean2=.75,mean3=.95,mean4=1.1,n1=10,n2=10,n3=10, n4=10, sd1=.3, sd2=.3,sd3=.3,sd4=.3){
+  myDF<-data.frame(Control=rnorm(mean=mean1, n=n1, sd=sd1), Light=rnorm(mean=mean2, n=n2, sd=sd2), Moderate=rnorm(mean=mean3, n=n3, sd=sd3), Extreme=rnorm(mean=mean4, n=n4, sd=sd4))
+                  return(myDF)}
+
+myDF <-FakeData(mean2=.75)
+head(myDF)
+
+library(reshape2)
+df<-melt(myDF)
+
+```
+The above code is a useful way to make any data into a data frame. It can be easily reused again and is better than the code written I wrote down in 2. because that can become very cumbersome to customize for each dtat set. For this particular data, my n is rather small. This is due to the fact that I was not allowed to take more than one destructive sample from each plot. Even though this is not an ideal sample size, it still seems to works.
+
+4. Write a function for Data Analysis:
+My data falls under the category of ANOVA analysis
+```{r}
+myANOVA <- function(dataFrame=df){
+ ANOVA <- aov(value~variable, data=dataFrame)
+  myOutput <- summary(ANOVA)
+  return(myOutput)
+}
+
+myANOVA()
+```
+
+5. The data simulation above yields a p value right varies, but is almost always significant to 2 or 3 stars. This shows me that data simulated by this set up with this rough estimation can yield significant findings. 
+
+6. Mean adjustments to see how the data changes
+
+```{r}
+df <-FakeData(mean1=.5, mean2=.6, mean3=.7, mean4=.8)
+df2 <- melt(df)
+myANOVA(dataFrame = df2)
+
+```
+I ran the data atleast 5 times with the above parameters and always got a significant p value.
+```{r}
+df <-FakeData(mean1=.45, mean2=.5, mean3=.55, mean4=.6)
+df2 <- melt(df)
+myANOVA(dataFrame = df2)
+
+```
+Out of the 6 times I ran the above parameters, the data was only significant 2 times. The values ranged from .584 to .000911. This is a little too risky for my liking.
+```{r}
+df <-FakeData(mean1=.4, mean2=.42, mean3=.44, mean4=.46)
+df2 <- melt(df)
+myANOVA(dataFrame = df2)
+
+```
+In the several times that I ran this above code, my the lowest p value yielded was .356. The effect size here is much too small to merit significant results.
+```{r}
+df <-FakeData(mean1=.4, mean2=.44, mean3=.48, mean4=.52)
+df2 <- melt(df)
+myANOVA(dataFrame = df2)
+
+```
+The above parameters spit out 1 significant p value for the 6 times that I ran it. Most of the p values were in the .1-.2 range. Again, not quite where I want to be. This effect size is too small.
+Based on the patterns I am seeing here, (I ran the above code several times to see the variance in P values for each different set of means), I would say that the "safest" effect size for my data with the standard deviation I assigned would be around .1 tips/cm of a difference between treatment groups. This was effect size was consistently giving me a P value that indicated significance while the other options would someitmes be close to .05 or even be as high as .9 got their p value.
+
+7. Now I am going to do the same sort of thing, but changing the sample size:
+```{r}
+df <-FakeData(n1=8, n2=8, n3=8, n4=8)
+df2 <- melt(df)
+myANOVA(dataFrame = df2)
+
+```
+When I ran it several times with 8 as my n, the data was always significant to atleast 2 stars.
+```{r}
+df <-FakeData(n1=7, n2=7, n3=7, n4=7)
+df2 <- melt(df)
+myANOVA(dataFrame = df2)
+
+```
+When I ran the sample size as 7, I got a p value less than .05 most of the time. It was sometimes much lower than .05 and sometimes very close to .05. The highest p value I got with this 9 was .179.
+```{r}
+df <-FakeData(n1=6, n2=6, n3=6, n4=6)
+df2 <- melt(df)
+myANOVA(dataFrame = df2)
+
+```
+This sample size gave really varied results. It seemed about 50/50 whether the p value was going to be above .05 or much lower than it.
+From the results of this above test, it looks like the lowest n I should really be going with is about 10. This makes sense to me because this is usually minimum n value people suggest when doing ecological studies. 
+
+8. This exercise was very helpful in showing me that I can simulate data to make sure that my n is large enough, and what critical minimum effect sizes can be observed in the data to yield signficant results. From this homework, I have learned that the minimum effect size between groups for ECM colonization should be around .1 tips/cm, and that the smallest n I should go with to comfortably and confidently yield significant results is around 10. 
+I will definitely be using this data simulation practice when setting up future experiments to validate my method and parameters.

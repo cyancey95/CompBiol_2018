@@ -1,0 +1,4 @@
+"0","expoPars <- fitdistr(z$ECM.tips.cm,""exponential"")"
+"0","rateML <- expoPars$estimate[""rate""]"
+"0","stat2 <- stat_function(aes(x = xval, y = ..y..), fun = dexp, colour=""blue"", n = length(z$ECM.tips.cm), args = list(rate=rateML))"
+"0"," p1 + stat + stat2"

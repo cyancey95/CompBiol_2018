@@ -1,0 +1,5 @@
+"0","stat3 <- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour=""darkgreen"", n = length(z$myVar), args = list(min=min(z$myVar), max=max(z$myVar)))
+"
+"2","no non-missing arguments to min; returning Inf"
+"2","no non-missing arguments to max; returning -Inf"
+"0"," p1 + stat + stat2 + stat3"

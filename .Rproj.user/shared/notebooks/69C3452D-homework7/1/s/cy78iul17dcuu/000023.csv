@@ -1,0 +1,6 @@
+"0","# make a function to create random normal data"
+"0","FakeData <-function(mean1=.6, mean2=.75,mean3=.95,mean4=1.1,n1=10,n2=10,n3=10, n4=10, sd1=.3, sd2=.3,sd3=.3,sd4=.3){"
+"0","  myDF<-data.frame(Control=rnorm(mean=mean1, n=n1, sd=sd1), Light=rnorm(mean=mean2, n=n2, sd=sd2), Moderate=rnorm(mean=mean3, n=n3, sd=sd3), Extreme=rnorm(mean=mean4, n=n4, sd=sd4))"
+"0","                  return(myDF)}"
+"0","myDF <-FakeData(mean2=.75)"
+"0","head(myDF)"

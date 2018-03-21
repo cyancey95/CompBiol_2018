@@ -1,0 +1,3 @@
+"0","p1 <- ggplot(data=x, aes(x=ECM.tips.cm, y=..density..)) +"
+"0","  geom_histogram(color=""grey60"",fill=""coral4"",size=0.2) "
+"0","print(p1)"

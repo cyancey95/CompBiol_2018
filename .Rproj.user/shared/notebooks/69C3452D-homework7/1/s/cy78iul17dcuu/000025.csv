@@ -1,0 +1,4 @@
+"0","library(reshape2)"
+"0","df<-melt(myDF)"
+"2","No id variables; using all as measure variables
+"

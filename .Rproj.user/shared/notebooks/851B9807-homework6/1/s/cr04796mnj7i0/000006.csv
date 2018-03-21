@@ -1,0 +1,5 @@
+"0","meanML <- normPars$estimate[""mean""]"
+"0","sdML <- normPars$estimate[""sd""]"
+"0","xval <- seq(0,max(z$ECM.tips.cm),len=length(z$ECM.tips.cm))"
+"0"," stat <- stat_function(aes(x = xval, y = ..y..), fun = dnorm, colour=""red"", n = length(z$Height), args = list(mean = meanML, sd = sdML))"
+"0"," p1 + stat"
