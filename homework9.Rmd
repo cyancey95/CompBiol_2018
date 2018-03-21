@@ -111,3 +111,4 @@ PLotting both graphs side by side
 ANOVAplot()
 BPlot()
 ```
+I am now able to visualize the data in 2 different types of graph. I am still reading up on how to place error bars on the bar chart. I would also like to create a for loop of this too at some point to simulate the data a few times. I will try to get to that next week.
