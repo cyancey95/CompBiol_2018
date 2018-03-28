@@ -1,0 +1,9 @@
+"0","#now add a data frame
+write.table(x=statsOut,
+            file=fileOut,
+            row.names= FALSE,
+            col.names= TRUE,
+            sep="","",
+            append=TRUE)
+"
+"2","appending column names to file"

@@ -40,5 +40,12 @@ The first homework was to create the webpage and get it linked to GitHub!
 ###Homework 7 & 8
 [Creating Fake Data Sets to Simulate Experiments](homework7.html)
 
-###9
+### Homework 9
 [Structured Programming Practice](homework9.html)
+
+### Homeowork 10
+[Understanding Batch Processing Functions](homework10.html)
+
+
+
+

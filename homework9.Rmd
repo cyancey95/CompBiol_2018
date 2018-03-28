@@ -101,7 +101,7 @@ BmyANOVA <- function(dataFrame=df){
 #-----------------------------------------------
 BPlot <-function(data=df){
   plot<-ggplot(df, aes(x=variable, y=value, fill=variable)) +
-  geom_bar(stat="identity")+theme_minimal()
+  geom_bar(stat="identity")+theme_minimal() 
   return(plot)
 }
 ```
