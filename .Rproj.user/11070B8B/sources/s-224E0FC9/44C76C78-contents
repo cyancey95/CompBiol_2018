@@ -1,0 +1,265 @@
+---
+title: "Randomization and Function Plotting"
+author: "Colleen Yancey"
+date: "April 4, 2018"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+```
+
+
+### Editting the Class code to our own function
+In my research I use a fungal hyphal length equation to help determine average hyphae length in soil samples. This is important in understanding fungal activity, and soil health. Knowing the length of these hyphae can help you to determine relative growth rates, and compare hyphae presence from different soils. It is a very basic equation that I have used a lot. The data retrieval can be really annoying (counting little pink squiggles on a microscope that intersect a grid line) but can be very informative overall.
+<br/>
+Below is the code I have modified for hyphal length analysis. 
+```{r}
+# Hyphal Lenght analysis
+# 27 March 2018
+# CEY
+
+# The equation: HL = ll/14*N*g gives you hyphal root length
+##################################################
+# FUNCTION: HyphaeLen
+# determines average hyphae root length in a soil sample 
+# input: N = number of intersections across vertical and horizontal lines
+#        g= gird unit length of section (cm)
+#        C = predetermined constant (done by Tennet, 1975
+# output: root length 
+#------------------------------------------------- 
+
+HyphaeLen <- function(N=20:200,c=(11/14),g=.05){
+  HL <-N*c*g
+  return(HL)
+}
+head(HyphaeLen())
+```
+  
+<br/>
+Now I am going to create a function to plot this data
+```{r}
+#######################
+# FUNCTION: HyphaeLenPlot
+# plot hyphae length curves with parameter values
+# input: N= number of intersections across vertical and horizontal lines
+#       g= grid unit length (cm)
+#       c= predetermined constant (done by Tennet 1975)
+#output: smoothed curve with parameters in the graph
+#-----------------------------------------
+
+HyphaeLenPlot <- function(N=20:200, c=11/14, g=0.05){
+ plot(x=N,y=HyphaeLen(N,g,c),type="l",xlab="Intersections",ylab="S",ylim=c(0,10))
+mtext(paste("g =", g,"  c =",c),cex=0.7) 
+      return()
+}
+HyphaeLenPlot()
+```
+<br/>
+### Now build a grid of plots!
+```{r}
+gPars <- c(.01, .03, .05)
+cPars <- c(8/14, 10/14, 11/14, 13/14)
+par(mfrow=c(3,4))
+for(i in seq_along(gPars)){
+  for(j in seq_along(cPars)){
+    HyphaeLenPlot(g=gPars[i], c=cPars[j])
+  }
+}
+```
+
+
+<br/>
+###Using the `expand.grid()` function to create a dataframe with parameter combinations
+```{r}
+modelFrame<-expand.grid(gPars, cPars)
+modelFrame$S<- NA
+modelFrame
+
+```
+<br/>
+### Parameter sweeping redux with `ggplot2` graphics
+```{r}
+Area <- 1:5 #keep this very small initially
+cPars <- c(50,80,120)
+zPars <- c(11/14, 13/14, 9/14, 10/14)
+
+HyphaeLength <- function(A=1:5000,c= 0.5,z=0.26){
+  
+  S <- c*(A^z)
+return(S)
+}
+head(HyphaeLength())
+
+# set up model frame
+modelFrame <- expand.grid(c=cPars,z=zPars,A=Area)
+modelFrame$S <- NA
+
+
+# loop through the parameters and fill with SA function
+
+for (i in 1:length(cPars)) {
+  for (j in 1:length(zPars)) {
+    modelFrame[modelFrame$c==cPars[i] & modelFrame$z==zPars[j],"S"] <-   HyphaeLength(A=Area,c=cPars[i],z=zPars[j])
+  }
+}
+# print(modelFrame) # check by printing a data frame with limited parameter values
+
+library(ggplot2)
+
+p1 <- ggplot(data=modelFrame)
+p1 + geom_line(mapping= aes(x=A,y=S)) +
+  facet_grid(c~z)
+
+```
+```{r}
+p2 <- p1
+p2 + geom_line(mapping=aes(x=A,y=S,group=z)) +
+  facet_grid(.~c)
+```
+```{r}
+p3 <- p1
+p3 + geom_line(mapping=aes(x=A,y=S,group=c)) +
+  facet_grid(z~.)
+```
+
+<br/>
+Conducting A randomization test for my own data
+```{r}
+#preliminaries
+library(ggplot2)
+library(TeachingDemos)
+char2seed("Cruel April")
+
+#############################################
+#FUNCTION: readData
+# read in or generate data frame, will get changed most when you work with it in future
+# input filename (or nothing for demo)
+#output: 3-column data frame of observed data:
+#dat:(ID,x,y)
+#--------------------------------------------------
+
+readData <- function(z=NULL){
+  if(is.null(z)){
+    xVar <- c(0,6,13,19)
+    yVar <- c(8.947,8.289,6.346,3.766)
+    dF <- data.frame(ID=seq_along
+                     (xVar), xVar, yVar)
+    return(dF)}
+}
+
+
+#preliminary data on AMF colonization regression, imcomlete, but I think it'll work for this purpose. X is icing treatment (mm thick of ice, and y is AMF structures/cm
+
+readData()
+
+################################################
+# FUNCTION: getMetric
+# claculate metric for randomization test
+#input 3-column data frame for regression
+#ouput: regression slope
+#------------------------------------------------
+
+getMetric <- function(z=NULL){
+  if(is.null(z)){
+    xVar <- c(0,6,13,19)
+    yVar <- c(8.947,8.289,6.346,3.766)
+    z <- data.frame(ID=seq_along
+                    (xVar), xVar, yVar)}
+  . <- lm(z[,3]~z[,2])
+  . <- summary(.)
+  . <- .$coefficients[2,1]
+  slope <- .
+  return(slope)
+}
+getMetric()
+
+
+#################################################
+#FUNCTION: shuffleData
+# randomize data for regression data analysis
+# input 3-column data frame for regression
+# output 3-column data frame for regression
+#-------------------------------------------
+
+shuffleData <- function(z=NULL){
+  if(is.null(z)){
+    xVar <- c(0,6,13,19)
+    yVar <- c(8.947,8.289,6.346,3.766)
+    z <- data.frame(ID=seq_along
+                    (xVar), xVar, yVar)}
+  
+  z[,3] <- sample(z[,3])
+  return(z)
+}
+shuffleData()
+
+###############################################
+#FUNCTION: getPVal
+#calculate p value for observed, simulated data
+#input: list of observed metric and vector of simulated metric,
+#output: lower, upper tail probability vector
+#---------------------------------------------
+
+getPval <- function(z=NULL) {
+  if(is.null(z)){
+    z <- list(xObs=runif(1), xSim=runif(1000))}
+  
+  pLower <- mean(z[[2]] <=z[[1]])
+  pUpper <- mean(z[[2]] >=z[[1]])
+  
+  return(c(pL=pLower, pU= pUpper))
+  
+}
+getPval()
+
+#----------------------------------------------------------------
+#main body of code
+nSim <- 10000 # number of simulations
+Xsim <- rep(NA, nSim) #will hold simulated slopes
+
+dF <- readData()
+Xobs <- getMetric(dF)
+
+for (i in seq_len(nSim)) {
+  Xsim[i] <- getMetric(shuffleData(dF)) }
+
+slopes <- list(Xobs,Xsim)
+getPval(slopes)
+
+###############################################################
+# FUNCTION: plotRanTest
+# ggplot graph
+# input: list of observed metric and vector of the simulated metric
+# output: ggplot graph
+#---------------------------------------------------------------
+
+plotRantTest <- function(z=NULL){
+  if(is.null(z)){
+    z <- list(xObs=runif(1), xSim=runif(1000))}
+  df <- data.frame(ID= seq_along(z[[2]]), 
+                   simX=z[[2]])
+  p1 <- ggplot(data=df, mapping=aes(x=simX))
+  p1 + geom_histogram(mapping=aes(fill=I("mistyrose1"), color=I("black"))) +
+    geom_vline(aes(xintercept=z[[1]], col="blue"))
+}
+plotRantTest()
+```
+<br/>
+3. As seen above, my pL is 0.0415. This is how I would get a p value for the data I created using a simple linear model
+```{r}
+xVar <- c(0,6,13,19)
+yVar <- c(8.947,8.289,6.346,3.766)
+ID <- seq_along(xVar)
+RegData <- data.frame(ID, xVar, yVar)
+head(RegData)
+str(RegData)
+
+#model
+regModel <-lm(yVar~xVar, data=RegData)
+
+#model output
+summary(regModel)
+```
+<br/>
+Although this data is not yet complete, it does appear that if you create a randomized data set that it will show you that your data is signficant with somewhat similar p-values generated. When I made the number of simulations greater, the p-value was even closer to the p value generated by the regression model I used. The p value for my 0.0288. The p value for the simulated data was 0.049. I would say these are similar enough and important because they are both statistically signifcant. When I upped the simulation to 10,000 the p value dropped to 0.0411 as seen above. I think that as you increased N, the p value will get closer and closer to my observed data. This indicates the rarity of the results I obtained and it's significance. This was really good practice in mastering this code and now I fully understand how to apply it to my own data. It is great for regressions and I definitely plan on using it in the future. 

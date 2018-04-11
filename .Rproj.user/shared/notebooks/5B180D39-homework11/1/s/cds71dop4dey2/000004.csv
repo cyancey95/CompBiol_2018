@@ -1,0 +1,3 @@
+"0","modelFrame<-expand.grid(gPars, cPars)"
+"0","modelFrame$S<- NA"
+"0","modelFrame"

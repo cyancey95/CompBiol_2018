@@ -1,0 +1,8 @@
+"0","gPars <- c(.01, .03, .05)"
+"0","cPars <- c(8/14, 10/14, 11/14, 13/14)"
+"0","par(mfrow=c(3,4))"
+"0","for(i in seq_along(gPars)){"
+"0","  for(j in seq_along(cPars)){"
+"0","    HyphaeLenPlot(g=gPars[i], c=cPars[j])"
+"0","  }"
+"0","}"
