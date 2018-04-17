@@ -1,0 +1,4 @@
+"0","# subset the data to make it easier to work on"
+"0","# subset spring data"
+"0","SpringData <- Hdata[1:30,]"
+"0","print(SpringData)"

@@ -1,0 +1,6 @@
+"0","m1 <- ggplot(data=SpringData,"
+"0","             mapping=(aes(x=Treatment, y=ECM, size=AMF)))+"
+"0","  geom_point() +"
+"0","  xlab(""Icing Treatment (mm of ice)"") +"
+"0","  ylab(""Colonization"")"
+"0","print(m1)"

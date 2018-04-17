@@ -1,0 +1,8 @@
+"0","#AMF data Below"
+"0","AFplot<- ggplot(data=FallData, mapping=aes(x=Treatment, y=AMF)) +"
+"0","  geom_point(size=4, shape=23, color=""black"", fill=""darkorange4"") +"
+"0","  theme_classic(base_size=14) +"
+"0","  xlab(""Icing Treatment(mm of ice)"") +"
+"0","  ylab(""AMF Colonization (structures/cm)"")+"
+"0","  ggtitle(""Fall AMF Colonization"")"
+"0","print(AFplot)"

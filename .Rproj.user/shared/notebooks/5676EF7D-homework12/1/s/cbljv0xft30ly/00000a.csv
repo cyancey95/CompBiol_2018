@@ -1,0 +1,3 @@
+"0","#subset fall data"
+"0","FallData <- Hdata[31:60,]"
+"0","print(FallData)"
